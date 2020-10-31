@@ -2,6 +2,7 @@ import LentaDemonstration from './pages/LentaDemonstration'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import SearchPage from './pages/SearchPage'
+import './index.css'
 
 function App() {
   return (

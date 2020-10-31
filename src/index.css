@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.cross:hover {
+  transition: all ease-in 0.05s;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.book-name {
+  font-size: 20px;
+}
+
+.book-cover {
+  width: 90px;
+  height: 100%;
+  object-fit: contain;
+}
