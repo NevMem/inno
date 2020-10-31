@@ -18,6 +18,11 @@ class BackedApi {
         return axios.post(backendUrl + 'add-book', { book: book, uid: userIdHolder.provide() })
             .then(data => data.data)
     }
+
+    recommend() {
+        return axios.post(backendUrl + 'recommend', { uid: userIdHolder.provide() })
+            .then(data => data.data)
+    }
 }
 
 const backendApi = new BackedApi()

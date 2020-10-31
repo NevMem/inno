@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { List, Display4, Row, Col, Card, Button } from 'bootstrap-4-react'
+import { Link } from 'react-router-dom'
 import cross from '../cross.svg'
 
 class Book extends Component {
@@ -98,7 +99,9 @@ export default class SavedResults extends Component {
                     style={{margin: '10px auto', display: 'block', fontSize: '20px'}}
                     onClick={this.sendBooksToServer.bind(this)}
                     warning>
-                        Получить персонализированную выдачу!
+                        <Link className="button-with-link" to="/lenta">
+                            Получить персонализированную выдачу!
+                        </Link>
                 </Button>
             </div>
         )
