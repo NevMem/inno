@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { InputGroup, Form, Button, Dropdown } from 'bootstrap-4-react'
+import Loader from './Loader';
 
 export default class SearchField extends Component {
     constructor(prps) {
         super(prps)
         this.state = {
             query: '',
-            suggests: []
+            loading: false,
+            suggests: [],
+            requestCounter: 0
         }
     }
 
@@ -19,11 +22,21 @@ export default class SearchField extends Component {
         }, () => { this.querySuggests() })
     }
 
+    handleLoading(value) {
+        this.setState(state => { return { ...state, loading: value } })
+    }
+
     querySuggests() {
         if (this.state.query.length !== 0) {
+            const currentIndex = this.state.requestCounter + 1
+            this.setState({...this.state, requestCounter: currentIndex})
+            this.handleLoading(true)
             this.props.provider.querySuggests(this.state.query)
                 .then(suggests => {
-                    this.setState(state => { return { ...state, suggests: suggests } })
+                    if (currentIndex === this.state.requestCounter) {
+                        this.handleLoading(false)
+                        this.setState(state => { return { ...state, suggests: suggests } })
+                    }
                 })
         } else {
             this.setState(state => { return { ...state, suggests: [] } })
@@ -31,7 +44,7 @@ export default class SearchField extends Component {
     }
 
     hasSuggests() {
-        return this.state.suggests.length !== 0
+        return this.state.suggests.length !== 0 || this.state.loading
     }
 
     handleAddFromSuggest(book) {
@@ -41,6 +54,22 @@ export default class SearchField extends Component {
                     return { ...state, query: '' }
                 }, () => { this.querySuggests() })
             })
+    }
+
+    generateDropdownContent() {
+        if (this.state.loading) {
+            return <Loader />
+        }
+        return (
+            this.state.suggests.map((elem, index) => {
+                return <Dropdown.Item
+                        onClick={this.handleAddFromSuggest.bind(this, elem)}
+                        className="m-dropdown-item"
+                        key={index}>
+                        {elem.name} {elem.author && <span style={{color: '#909090'}}>{elem.author}</span>}
+                    </Dropdown.Item>
+            })
+        )
     }
 
     render() {
@@ -54,14 +83,7 @@ export default class SearchField extends Component {
                 </InputGroup>
                 {this.hasSuggests() &&
                     <Dropdown.Menu className="m-dropdown-menu" style={{display: 'block', width: '100%'}} aria-labelledby="search">
-                        {this.state.suggests.map((elem, index) => {
-                            return <Dropdown.Item
-                                    onClick={this.handleAddFromSuggest.bind(this, elem)}
-                                    className="m-dropdown-item"
-                                    key={index}>
-                                    {elem.name} {elem.author && <span style={{color: '#909090'}}>{elem.author}</span>}
-                                </Dropdown.Item>
-                        })}
+                        {this.generateDropdownContent()}
                     </Dropdown.Menu>
                 }
                 
