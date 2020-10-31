@@ -89,7 +89,6 @@ export default class SearchField extends Component {
                         {this.generateDropdownContent()}
                     </Dropdown.Menu>
                 }
-                
             </Dropdown>
         )
     }

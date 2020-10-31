@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { List, Display4, Row, Col, Card } from 'bootstrap-4-react'
+import { List, Display4, Row, Col, Card, Button } from 'bootstrap-4-react'
 import cross from '../cross.svg'
 
 class Book extends Component {
@@ -84,6 +84,26 @@ export default class SavedResults extends Component {
         )
     }
 
+    sendBooksToServer() {
+
+    }
+
+    createGoToLentaButtonIfNeeded() {
+        if (this.state.books.length === 0) {
+            return null
+        }
+        return (
+            <div style={{width: '100%'}}>
+                <Button
+                    style={{margin: '10px auto', display: 'block', fontSize: '20px'}}
+                    onClick={this.sendBooksToServer.bind(this)}
+                    warning>
+                        Получить персонализированную выдачу!
+                </Button>
+            </div>
+        )
+    }
+
     render() {
         return (
             <Fragment>
@@ -97,6 +117,7 @@ export default class SavedResults extends Component {
                         )
                     })}
                     { this.createNoBooksBlockIfNeeded() }
+                    { this.createGoToLentaButtonIfNeeded() }
                 </List>
             </Fragment>
         )
