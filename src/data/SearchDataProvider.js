@@ -80,13 +80,17 @@ class SearchDataProvider {
 
     saveBook(book) {
         return new Promise((res, rej) => {
+            console.log(this.savedBooks, book)
             if (this.savedBooks.indexOf(book) === -1) {
                 this.savedBooks.push(book)
+                backendApi.addBook(book)
+                    .then(() => {
+                        res()
+                        this.listeners.forEach(listener => {
+                            listener.savedUpdated()
+                        })
+                    })
             }
-            res()
-            this.listeners.forEach(listener => {
-                listener.savedUpdated()
-            })
         })
     }
 }
