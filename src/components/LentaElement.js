@@ -55,6 +55,17 @@ export default class LentaElement extends Component {
         )
     }
 
+    createImageBlockIfNeeded() {
+        const data = this.props.data
+        if (data.imgUrl) {
+            return <img
+                style={{marginLeft: '-20px', height: '320px', width: 'calc(100% + 40px)', objectFit: 'cover', marginBottom: '-20px'}}
+                src={data.imgUrl}
+                alt={data.description} />
+        }
+        return null
+    }
+
     render() {
         const data = this.props.data
         return (
@@ -62,6 +73,7 @@ export default class LentaElement extends Component {
                 <Card.Body>
                     <Card.Title>{data.name}</Card.Title>
                     <Card.Text>{data.description}</Card.Text>
+                    {this.createImageBlockIfNeeded()}
                 </Card.Body>
                 <Card.Footer>
                     {this.generateLikeDislikeBlock()}

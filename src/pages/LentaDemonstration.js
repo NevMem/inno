@@ -22,7 +22,7 @@ export default class LentaDemonstration extends Component {
             <Container>
                 <Row>
                     <Col col="col lg-2"/>
-                    <Col>
+                    <Col style={{paddingLeft: '100px', paddingRight: '100px', paddingBottom: '50px'}}>
                         <Lenta rows={this.state.rows} />
                     </Col>
                     <Col col="col lg-2"/>
