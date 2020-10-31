@@ -4,7 +4,7 @@ export default class DataProvider {
     transformToFrontTypes(elem) {
         return {
             name: elem.title,
-            description: elem.author
+            description: elem.author ? "Автор: " + elem.author : undefined
         }
     }
 
