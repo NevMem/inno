@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react'
 import { InputGroup, Form, Button, Alert, Card, Lead, Row, Col } from 'bootstrap-4-react'
 import geocodingApi from '../api/GeocodingApi'
+import backendApi from '../api/BackendApi'
 
 export class UserDataComponent extends Component {
 
@@ -13,7 +14,9 @@ export class UserDataComponent extends Component {
             error: undefined,
             selectedAddress: undefined,
             stage: 'map', // can be map and age
-            age: 23
+            age: 23,
+            loading: undefined,
+            message: undefined
         }
     }
 
@@ -28,18 +31,13 @@ export class UserDataComponent extends Component {
 
     onMarkerClick(address) {
         console.log(address)
+        this.handleSuccess(undefined)
         this.setState(state => {
             return {
                 ...state,
                 selectedAddress: address,
                 stage: 'age'
             }
-        })
-    }
-
-    handleError(message) {
-        this.setState(state => {
-            return { ...state, error: message }
         })
     }
 
@@ -58,10 +56,11 @@ export class UserDataComponent extends Component {
     }
 
     handleSearchClick() {
+        this.handleLoading("Ищем возможные результаты")
         geocodingApi.getPositionByAddress(this.state.query)
             .then(data => {
                 if (data.status === "OK") {
-                    this.handleError(undefined)
+                    this.handleSuccess("Нашлось " + data.results.length + " результатов")
                     this.handleAdresses(data.results)
                 } else {
                     this.handleError("Поиск не дал результатов")
@@ -104,8 +103,38 @@ export class UserDataComponent extends Component {
         })
     }
 
-    fetchDataToServer() {
+    handleError(message) {
+        this.setState(state => {
+            return { ...state, error: message, loading: undefined, message: undefined }
+        })
+    }
 
+    handleLoading(message) {
+        this.setState(state => {
+            return { ...state, loading: message, error: undefined, message: undefined }
+        })
+    }
+
+    handleSuccess(message) {
+        this.setState(state => {
+            return { ...state, message: message, error: undefined, loading: undefined }
+        })
+    }
+
+    sendDataToServer() {
+        this.handleLoading("Сохраняем данные на сервере")
+        backendApi.saveUserData({
+            age: this.state.age,
+            location: this.state.selectedAddress.location,
+            address: this.state.selectedAddress.address})
+            .then(data => {
+                console.log(data)
+                this.handleSuccess("Данные успешно сохранены")
+            })
+            .catch(err => {
+                console.log(err)
+                this.handleError("Что-то пошло не так((")
+            })
     }
 
     generateStageRelatedContent() {
@@ -128,6 +157,8 @@ export class UserDataComponent extends Component {
                         </InputGroup.Append>
                     </InputGroup>
                     {this.state.error && <Alert warning>{this.state.error}</Alert>}
+                    {this.state.message && <Alert success>{this.state.message}</Alert>}
+                    {this.state.loading && <Alert info>{this.state.loading}</Alert>}
                     <Map
                         google={this.props.google}
                         zoom={12}
@@ -163,12 +194,15 @@ export class UserDataComponent extends Component {
                                     onChange={this.handleAgeChange.bind(this)}
                                     aria-label="Age" />
                             </InputGroup>
+                            {this.state.error && <Alert warning>{this.state.error}</Alert>}
+                            {this.state.message && <Alert success>{this.state.message}</Alert>}
+                            {this.state.loading && <Alert info>{this.state.loading}</Alert>}
                         </Col>
                     </Row>
                     <div style={{width: '100%'}}>
                         <Button
                             style={{margin: '0 auto', display: 'block'}}
-                            onClick={this.fetchDataToServer.bind(this)}
+                            onClick={this.sendDataToServer.bind(this)}
                             warning>
                                 Сохранить!
                         </Button>
