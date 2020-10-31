@@ -27,3 +27,11 @@ code {
   height: 100%;
   object-fit: contain;
 }
+
+.m-dropdown-menu > .m-dropdown-item {
+  cursor: pointer;
+}
+
+.m-dropdown-menu > .m-dropdown-item:active {
+  background-color: #ffc10790;
+}

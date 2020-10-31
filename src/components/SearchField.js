@@ -49,12 +49,13 @@ export default class SearchField extends Component {
                     </InputGroup.Append>
                 </InputGroup>
                 {this.hasSuggests() &&
-                    <Dropdown.Menu style={{display: 'block', width: '100%'}} aria-labelledby="search">
+                    <Dropdown.Menu className="m-dropdown-menu" style={{display: 'block', width: '100%'}} aria-labelledby="search">
                         {this.state.suggests.map((elem, index) => {
                             return <Dropdown.Item
                                     onClick={this.handleAddFromSuggest.bind(this, elem)}
+                                    className="m-dropdown-item"
                                     key={index}>
-                                    {elem.name}
+                                    {elem.name} {elem.author && <span style={{color: '#909090'}}>{elem.author}</span>}
                                 </Dropdown.Item>
                         })}
                     </Dropdown.Menu>
