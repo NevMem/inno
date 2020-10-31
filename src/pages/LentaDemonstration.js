@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'bootstrap-4-react'
 import Lenta from '../components/Lenta.js'
 import DataProvider from '../data/DataProvider'
 
-export default class MainPage extends Component {
+export default class LentaDemonstration extends Component {
     constructor(prps) {
         super(prps)
         this.state = {

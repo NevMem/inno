@@ -1,9 +1,9 @@
-import MainPage from './pages/MainPage'
+import LentaDemonstration from './pages/LentaDemonstration'
 
 function App() {
   return (
     <div className="App">
-      <MainPage />
+      <LentaDemonstration />
     </div>
   )
 }

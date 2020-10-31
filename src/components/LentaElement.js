@@ -36,6 +36,25 @@ export default class LentaElement extends Component {
         this.setState({ ...this.state, likeState: 'dislike' })
     }
 
+    generateLikeDislikeBlock() {
+        return (
+            <Row>
+                <Col onClick={this.handleLikeClick.bind(this)}>
+                    <img
+                        style={{width: '26px', display: 'block', margin: 'auto'}}
+                        alt='like'
+                        src={this.getLikeImage()} />
+                </Col>
+                <Col onClick={this.handleDislikeClick.bind(this)}>
+                    <img
+                        style={{width: '26px', display: 'block', margin: 'auto'}}
+                        alt='dislike'
+                        src={this.getDislikeImage()} />
+                </Col>
+            </Row>
+        )
+    }
+
     render() {
         const data = this.props.data
         return (
@@ -43,21 +62,10 @@ export default class LentaElement extends Component {
                 <Card.Body>
                     <Card.Title>{data.name}</Card.Title>
                     <Card.Text>{data.description}</Card.Text>
-                    <Row>
-                        <Col onClick={this.handleLikeClick.bind(this)}>
-                            <img
-                                style={{width: '26px', display: 'block', margin: 'auto'}}
-                                alt='like'
-                                src={this.getLikeImage()} />
-                        </Col>
-                        <Col onClick={this.handleDislikeClick.bind(this)}>
-                            <img
-                                style={{width: '26px', display: 'block', margin: 'auto'}}
-                                alt='dislike'
-                                src={this.getDislikeImage()} />
-                        </Col>
-                    </Row>
                 </Card.Body>
+                <Card.Footer>
+                    {this.generateLikeDislikeBlock()}
+                </Card.Footer>
             </Card>
         )
     }
