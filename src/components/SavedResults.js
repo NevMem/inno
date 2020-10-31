@@ -71,6 +71,19 @@ export default class SavedResults extends Component {
         this.props.provider.removeBook(book)
     }
 
+    createNoBooksBlockIfNeeded() {
+        if (this.state.books.length !== 0) {
+            return null
+        }
+        return (
+            <Card>
+                <Card.Body>
+                    <p style={{fontSize: '40px', textAlign: 'center', lineHeight: '150px'}}>=( Вы пока не добавили не одной книги</p>
+                </Card.Body>
+            </Card>
+        )
+    }
+
     render() {
         return (
             <Fragment>
@@ -83,6 +96,7 @@ export default class SavedResults extends Component {
                             </List.Item>
                         )
                     })}
+                    { this.createNoBooksBlockIfNeeded() }
                 </List>
             </Fragment>
         )
