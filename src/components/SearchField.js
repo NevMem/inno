@@ -39,7 +39,10 @@ export default class SearchField extends Component {
                     }
                 })
         } else {
+            const currentIndex = this.state.requestCounter + 1
+            this.setState({...this.state, requestCounter: currentIndex})
             this.setState(state => { return { ...state, suggests: [] } })
+            this.handleLoading(false)
         }
     }
 
