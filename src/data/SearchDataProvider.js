@@ -1,6 +1,6 @@
+import backendApi from "../api/BackendApi";
 
-
-export default class SearchDataProvider {
+class SearchDataProvider {
     constructor() {
         this.books = [
             {
@@ -23,7 +23,6 @@ export default class SearchDataProvider {
             { name: "Все реплики Роршаха из хранителей" },
         ]
         this.savedBooks = [
-            this.books[0]
         ]
         this.listeners = []
     }
@@ -42,17 +41,21 @@ export default class SearchDataProvider {
         this.listeners.splice(index, 1)
     }
 
+    transformIntoFrontTypes(elem) {
+        return {
+            ...elem,
+            name: elem.title,
+            author: elem.author
+        }
+    }
+
     querySuggests(query) {
-        return new Promise((res, rej) => {
-            if (query.length === 0) {
-                res([])
-                return
-            }
-            let result = this.books.filter(book => {
-                return book.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        return backendApi.search(query)
+            .then(data => {
+                console.log(data)
+                return data
             })
-            res(result)
-        })
+            .then(data => data.map(this.transformIntoFrontTypes))
     }
 
     getSavedBooks() {
@@ -87,3 +90,7 @@ export default class SearchDataProvider {
         })
     }
 }
+
+const searchData = new SearchDataProvider()
+
+export default searchData

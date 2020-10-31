@@ -20,10 +20,14 @@ export default class SearchField extends Component {
     }
 
     querySuggests() {
-        this.props.provider.querySuggests(this.state.query)
-            .then(suggests => {
-                this.setState(state => { return { ...state, suggests: suggests } })
-            })
+        if (this.state.query.length !== 0) {
+            this.props.provider.querySuggests(this.state.query)
+                .then(suggests => {
+                    this.setState(state => { return { ...state, suggests: suggests } })
+                })
+        } else {
+            this.setState(state => { return { ...state, suggests: [] } })
+        }
     }
 
     hasSuggests() {

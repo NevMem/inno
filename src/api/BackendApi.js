@@ -7,6 +7,11 @@ class BackedApi {
         return axios.post(backendUrl + 'setUserData', userData)
             .then(data => data.data)
     }
+
+    search(query) {
+        return axios.post(backendUrl + 'search', { search_str: query })
+            .then(data => data.data)
+    }
 }
 
 const backendApi = new BackedApi()
