@@ -79,7 +79,7 @@ export default class SavedResults extends Component {
         return (
             <Card>
                 <Card.Body>
-                    <p style={{fontSize: '40px', textAlign: 'center', lineHeight: '150px'}}>=( Вы пока не добавили не одной книги</p>
+                    <p style={{fontSize: '40px', textAlign: 'center', lineHeight: '150px'}}>=( Вы пока не добавили ни одной книги</p>
                 </Card.Body>
             </Card>
         )
