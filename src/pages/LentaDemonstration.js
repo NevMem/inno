@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'bootstrap-4-react'
 import Lenta from '../components/Lenta.js'
 import DataProvider from '../data/DataProvider'
-import Sidebar from '../components/SIdebar.js';
+import Sidebar from '../components/Sidebar'
 
 export default class LentaDemonstration extends Component {
     constructor(prps) {
@@ -27,7 +27,6 @@ export default class LentaDemonstration extends Component {
     render() {
         return (
             <Container>
-                <Sidebar />
                 <Row>
                     <Col col="col lg-2"/>
                     <Col style={{paddingLeft: '100px', paddingRight: '100px', paddingBottom: '50px'}}>
@@ -35,6 +34,7 @@ export default class LentaDemonstration extends Component {
                     </Col>
                     <Col col="col lg-2"/>
                 </Row>
+                <Sidebar />
             </Container>
         )
     }

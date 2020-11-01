@@ -28,6 +28,12 @@ export default class Sidebar extends Component {
                 <div>
                     <Link className="sidebar-link" to="/lenta">Рекомендации</Link>
                 </div>
+                <div
+                    style={{padding: '5px', paddingLeft: '14px', color: '#707070', cursor: 'pointer', zIndex: '10000'}}>
+                        <a className="presentation" href="https://drive.google.com/file/d/1amG1vAVRpLjt-Rx0FMESRseUIsabYLdh/view?usp=sharing">
+                            @artificial_intelligentsia
+                        </a>
+                </div>
             </div>
         )
     }

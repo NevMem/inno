@@ -126,3 +126,12 @@ code {
   text-decoration: none;
   background-color: #ffc107b6;
 }
+
+.presentation {
+  color: grey;
+}
+
+.presentation:hover {
+  color: black;
+  text-decoration: none;
+}
