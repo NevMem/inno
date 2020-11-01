@@ -2,9 +2,14 @@ import backendApi from "../api/BackendApi";
 
 export default class DataProvider {
     transformToFrontTypes(elem) {
-        return {
-            name: elem.title,
-            description: elem.author ? "Автор: " + elem.author : undefined
+        if (elem.type === 'book') {
+            return {
+                type: 'book',
+                name: elem.title,
+                description: elem.author ? "Автор: " + elem.author : undefined
+            }
+        } else {
+            return elem
         }
     }
 
@@ -12,7 +17,7 @@ export default class DataProvider {
         return new Promise((res, rej) => {
             backendApi.recommend()
             .then(data => {
-                res(data.map(this.transformToFrontTypes))
+                res(data.map(this.transformToFrontTypes).reverse())
             })
             /* res([
                 {

@@ -27,14 +27,25 @@ export default class Lenta extends Component {
         })
     }
 
+    filteredRows() {
+        return this.props.rows.filter(elem => {
+            if (this.state.filters.length === 0) {
+                return true
+            }
+            return this.state.filters.indexOf(elem.type) !== -1
+        })
+    }
+
     render() {
         return (
             <Fragment>
                 <Lead style={{marginTop: '20px'}}>Ваша персональная лента:</Lead>
                 <div>
-                    <Chip value='Что почитать' onToggle={this.toggled.bind(this, 'books')} />
+                    <Chip value='Что почитать' onToggle={this.toggled.bind(this, 'book')} />
+                    <span> </span>
+                    <Chip style={{marginLeft: '20px'}} value='Куда сходить' onToggle={this.toggled.bind(this, 'event')} />
                 </div>
-                { this.props.rows.map((elem, index) => {
+                { this.filteredRows().map((elem, index) => {
                     return <LentaElement key={index + elem.name} data={elem} />
                 })}
             </Fragment>
