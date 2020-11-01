@@ -17,7 +17,7 @@ export default class DataProvider {
         return new Promise((res, rej) => {
             backendApi.recommend()
             .then(data => {
-                res(data.map(this.transformToFrontTypes).reverse())
+                res(data.map(this.transformToFrontTypes))
             })
             /* res([
                 {
