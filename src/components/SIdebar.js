@@ -7,7 +7,7 @@ export default class Sidebar extends Component {
         return (
             <div style={{position: "fixed", top: "120px", left: "30px"}}>
                 <div>
-                    <Link className="sidebar-link" to="/search">Поиск</Link>
+                    <Link className="sidebar-link" to="/search">Книги</Link>
                 </div>
                 <div>
                     <Link className="sidebar-link" to="/userData">Мои данные</Link>

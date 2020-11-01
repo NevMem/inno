@@ -9,7 +9,7 @@ export default class UserDataPage extends Component {
             <Container style={{paddingTop: '50px'}}>
                 <Sidebar />
                 <Row>
-                    <Col style={{paddingLeft: '100px', paddingRight: '100px'}}>
+                    <Col style={{paddingLeft: '120px', paddingRight: '120px'}}>
                         <UserDataComponent />
                     </Col>
                 </Row>

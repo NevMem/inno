@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { InputGroup, Form, Button, Dropdown } from 'bootstrap-4-react'
-import Loader from './Loader';
+import { InputGroup, Form, Button, Dropdown, Lead } from 'bootstrap-4-react'
+import Loader from './Loader'
 
 export default class SearchField extends Component {
     constructor(prps) {
@@ -78,6 +78,7 @@ export default class SearchField extends Component {
     render() {
         return (
             <Dropdown>
+                <Lead>Добавьте книги, которые вы читали, чтобы мы смогли узнать о ваших интересах</Lead>
                 <InputGroup mb="3" id="search">
                     <Form.Input value={this.state.query} onChange={this.handleQueryChange.bind(this)} type="text" placeholder="Название книги" />
                     <InputGroup.Append>
