@@ -10,7 +10,7 @@ export default class Lenta extends Component {
     render() {
         return (
             this.props.rows.map((elem, index) => {
-                return <LentaElement key={index} data={elem} />
+                return <LentaElement key={index + elem.name} data={elem} />
             })
         )
     }
