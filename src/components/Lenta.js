@@ -40,7 +40,7 @@ export default class Lenta extends Component {
         return (
             <Fragment>
                 <Lead style={{marginTop: '20px'}}>Ваша персональная лента:</Lead>
-                <div>
+                <div style={{marginBottom: '20px'}}>
                     <Chip value='Что почитать' onToggle={this.toggled.bind(this, 'book')} />
                     <span> </span>
                     <Chip style={{marginLeft: '20px'}} value='Куда сходить' onToggle={this.toggled.bind(this, 'event')} />
