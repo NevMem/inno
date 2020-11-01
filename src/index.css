@@ -79,3 +79,17 @@ code {
   color: black;
   text-decoration: none;
 }
+
+.chip {
+  transition: all ease-in 0.2s;
+  background-color: #ffc10730;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.chip-enabled {
+  background-color: #ffc107D0;
+}
