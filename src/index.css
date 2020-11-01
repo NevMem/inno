@@ -93,3 +93,21 @@ code {
 .chip-enabled {
   background-color: #ffc107D0;
 }
+
+.sidebar-link {
+  text-decoration: none;
+  line-height: 2.2em;
+  font-size: 18px;
+  color: black;
+  width: 160px;
+  display: block;
+  padding-left: 14px;
+  margin-bottom: 10px;
+}
+
+.sidebar-link:hover {
+  text-decoration: none;
+  color: black;
+  background-color: #ffc107d0;
+  border-radius: 16px;
+}
